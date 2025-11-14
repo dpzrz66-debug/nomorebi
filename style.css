@@ -1,0 +1,230 @@
+/* ------------------ RESET ------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background: #0f0f0f;
+    color: #ffffff;
+    padding: 60px;
+}
+
+/* ------------------ LAYOUT ------------------ */
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+.left {
+    width: 60%;
+    min-width: 480px;
+}
+
+.right .image-frame {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border: 0px solid #444;
+    background: #000;
+    margin-top: -50px;
+}
+
+.right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ------------------ TITLES ------------------ */
+.title {
+    font-size: 6rem;
+    font-weight: 700;
+    white-space: nowrap; /* prevents line breaks */
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+}
+
+/* efecto tornasol / aberración cromática */
+.chroma {
+    position: relative;
+}
+.chroma::before,
+.chroma::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.25;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+.chroma::before {
+    color: #00c8ff;
+    transform: translate(2px, 0);
+}
+.chroma::after {
+    color: #ff2efc;
+    transform: translate(-2px, 0);
+}
+
+/* ------------------ CONTACT TEXT ------------------ */
+.email a {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.desc {
+    margin: 20px 0 40px;
+    max-width: 450px;
+    line-height: 1.55;
+    color: #b4b4b4;
+}
+
+/* ------------------ ENLACES WAVES ------------------ */
+.links a {
+    display: inline-block;
+    margin-right: 25px;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.wave::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #fff, #888, transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+
+.wave:hover::after {
+    transform: translateX(0);
+}
+
+/* ondulación */
+.wave:hover {
+    animation: waveMove 0.35s ease;
+}
+
+@keyframes waveMove {
+    0% { transform: translateY(0); }
+    45% { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+}
+
+/* ------------------ FOOTER ------------------ */
+footer {
+    margin-top: 120px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    color: #8b8b8b;
+    border-top: 1px solid #333;
+    padding-top: 28px;
+}
+
+footer p span {
+    font-size: 2.6rem;
+    font-weight: bold;
+}
+
+/* ------------------ RESPONSIVE ------------------ */
+@media (max-width: 1100px) {
+    .title {
+        font-size: 5rem;
+    }
+    .left {
+        width: 65%;
+    }
+}
+
+@media (max-width: 900px) {
+    .wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .left {
+        width: 100%;
+        min-width: 100%;
+    }
+    .title {
+        font-size: 4.4rem;
+        white-space: normal; /* permite bajar tamaño en pantallas chicas */
+    }
+    .right .image-frame {
+        width: 100%;
+        max-width: 320px;
+        height: 380px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 35px;
+    }
+    .title {
+        font-size: 3.4rem;
+    }
+    .desc {
+        font-size: 0.95rem;
+    }
+    .links a {
+        display: block;
+        margin-bottom: 12px;
+    }
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: left;
+    }
+}
+
+
+
+/* ------------------ CHROMATIC TOUCH RIPPLE ------------------ */
+
+.chromatic-ripple {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    opacity: 0.45;
+    mix-blend-mode: screen;
+    transform: scale(0);
+    animation: rippleAnim 0.6s ease-out forwards;
+    z-index: 9999;
+
+    /* aberración cromática duplicada */
+    background:
+        radial-gradient(circle, rgba(0,200,255,0.5) 0%, transparent 70%),
+        radial-gradient(circle, rgba(255,50,255,0.5) 0%, transparent 70%);
+}
+
+@keyframes rippleAnim {
+    0% {
+        transform: scale(0);
+        opacity: 0.6;
+    }
+    70% {
+        transform: scale(1.6);
+        opacity: 0.25;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+
+
